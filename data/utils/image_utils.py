@@ -56,6 +56,20 @@ class Image:
         pixel_std = [58.395, 57.12, 57.375]
         
         self.img = (self.img - pixel_mean) / pixel_std
+        
+    def denormalise(self):
+        """
+        Reverse the normalization to convert back to original pixel values [0, 255]
+        """
+        pixel_mean = np.array([123.675, 116.28, 103.53], dtype=np.float32)
+        pixel_std = np.array([58.395, 57.12, 57.375], dtype=np.float32)
+        
+        # Reverse the normalization: (img * std) + mean
+        self.img = (self.img * pixel_std) + pixel_mean
+        
+        # Clip to ensure values are within valid range [0, 255]
+        self.img = np.clip(self.img, 0, 255).astype(np.uint8)
+        return self
 
     def resize(self, shape):
         """

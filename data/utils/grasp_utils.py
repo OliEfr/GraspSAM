@@ -403,6 +403,7 @@ class GraspRectangle:
             ]
         )
         c = np.array(center).reshape((1, 2))
+        R = R.squeeze()
         self.points = ((np.dot(R, (self.points - c).T)).T + c).astype(np.int32)
 
     def scale(self, factor):
@@ -438,6 +439,13 @@ class GraspRectangle:
         :param factor: Zoom factor
         :param center: Zoom zenter (focus point, e.g. image center)
         """
+        # Convert to scalar if needed
+        if isinstance(factor, torch.Tensor):
+            factor = factor.item()
+        elif isinstance(factor, np.ndarray):
+            factor = factor.item()
+        
+        
         T = np.array(
             [
                 [1 / factor, 0],

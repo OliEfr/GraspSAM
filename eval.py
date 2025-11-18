@@ -219,12 +219,12 @@ if __name__ == "__main__":
     
     parser.add_argument("--gpu-num", type=int, default=0, help="gpu id number")
     parser.add_argument("--seen-set", action="store_true", help="seen set")
-    parser.add_argument("--dataset_name", type=str, default="jacquard", help="dataset name")
+    parser.add_argument("--dataset_name", type=str, default="grasp_anything", help="dataset name")
     parser.add_argument("--batch-size", type=int, default=1)
     
     parser.add_argument("--split", type=float, default=0.01)
-    parser.add_argument("--root", type=str, help="dataset root")
-    parser.add_argument("--ckp_path", type=str, help="ckp_path")
+    parser.add_argument("--root", type=str, default="datasets/Grasp-Anything", help="dataset root")
+    parser.add_argument("--ckp_path", type=str, default="pretrained_checkpoints/efficient_sam/efficient_sam_vitt.pt", help="ckp_path")
 
     args = parser.parse_args()
     exp_name = time.strftime('%c', time.localtime(time.time()))

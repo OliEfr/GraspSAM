@@ -275,23 +275,23 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--sam-encoder-type", type=str, default="eff_vit_t_w_ad")
-    parser.add_argument("--gpu-num", type=int, default=6, help="gpu id number")
+    parser.add_argument("--gpu-num", type=int, default=0, help="gpu id number")
 
-    parser.add_argument("--dataset-name", type=str, default="jacquard", help="dataset name")
-    parser.add_argument("--root", type=str, help="dataset root")
+    parser.add_argument("--dataset_name", type=str, default="grasp_anything", help="dataset name")
+    parser.add_argument("--root", type=str, default="datasets/Grasp-Anything", help="dataset root")
     parser.add_argument("--seen", action='store_true')
     parser.add_argument("--prompt", type=str, default='default')
     
-    parser.add_argument("--lr", type=float, default=1e-5)
+    parser.add_argument("--lr", type=float, default=1e-4)
     parser.add_argument("--epochs", type=int, default=200)
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--print-freq", type=int, default=50)
     
-    parser.add_argument("--save", action='store_true')
-    parser.add_argument("--save-dir", type=str, default="final_result")
+    parser.add_argument("--save", action='store_true', default=True)
+    parser.add_argument("--save-dir", type=str, default="final_result_overfit")
     parser.add_argument("--resume-ckp", type=str, default=None)
 
-    parser.add_argument("--validate", action='store_true')
+    parser.add_argument("--validate", action='store_true', default=True)
     parser.add_argument("--split", default=0.9, type=float)
 
     args = parser.parse_args()

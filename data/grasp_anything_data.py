@@ -33,7 +33,9 @@ class GraspAnythingDataset(BaseGraspDataset):
             with open(os.path.join('split/grasp-anything/seen.obj'), 'rb') as f:
                 idxs = pickle.load(f)
             
-            grasp_files = list(filter(lambda x: x.split('/')[-1].split('.')[0] in idxs, grasp_files))
+            # grasp_files = list(filter(lambda x: x.split('/')[-1].split('.')[0] in idxs, grasp_files))
+            idx_set = set(idxs)
+            grasp_files = [f for f in grasp_files if f.split('/')[-1].split('.')[0] in idx_set]
             split = int(np.floor(0.9 * len(grasp_files)))
             if self.train:
                 self.grasp_files = grasp_files[:split]
@@ -46,14 +48,18 @@ class GraspAnythingDataset(BaseGraspDataset):
             with open(os.path.join('split/grasp-anything/unseen.obj'), 'rb') as f:
                 idxs = pickle.load(f)
 
-            self.grasp_files = list(filter(lambda x: x.split('/')[-1].split('.')[0] in idxs, grasp_files))
+            # self.grasp_files = list(filter(lambda x: x.split('/')[-1].split('.')[0] in idxs, grasp_files))
+            idx_set = set(idxs)
+            self.grasp_files = [f for f in grasp_files if f.split('/')[-1].split('.')[0] in idx_set]
+            
+        # self.grasp_files = self.grasp_files[:25] # overfit on few samples
 
 
         l = len(self.grasp_files)
 
         self.grasp_files.sort()
    
-        # self.grasp_files = self.grasp_files[int(l*start):int(l*end)]
+        self.grasp_files = self.grasp_files[int(l*start):int(l*end)]
         
         self.length = len(self.grasp_files)
 

@@ -3,6 +3,7 @@
 checkpoints
 output
 final_result
+final_result_overfit
 tensorboard
 dino
 real_imgs
@@ -21,3 +22,7 @@ pretrained_checkpoint
 *.pt
 pretrained_checkpoint/*.pt
 pretrained_checkpoint/*.pth
+
+datasets
+
+
